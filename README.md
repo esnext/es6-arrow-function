@@ -146,6 +146,8 @@ $ node
 
 ## Contributing
 
+[![Build Status](https://travis-ci.org/square/es6-arrow-function.png?branch=master)](https://travis-ci.org/square/es6-arrow-function)
+
 ### Setup
 
 First, install the development dependencies:
