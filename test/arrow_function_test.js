@@ -66,9 +66,9 @@ describe('compile', function() {
   });
 });
 
-describe('compileAST', function() {
+describe('transform', function() {
   it('works with an AST instead of strings', function() {
-    expect('() => {}').to.compileToAST({
+    expect('() => {}').to.transform({
       type: "Program",
       body: [{
         type: "ExpressionStatement",
@@ -83,7 +83,8 @@ describe('compileAST', function() {
           },
           rest: null,
           generator: false,
-          expression: false
+          expression: false,
+          loc: null
         }
       }]
     });
