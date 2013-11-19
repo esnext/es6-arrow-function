@@ -12,7 +12,8 @@
   },
   "devDependencies": {
     "expect.js": "~0.2.0",
-    "json-diff": "~0.3.1"
+    "json-diff": "~0.3.1",
+    "mocha": "~1.14.0"
   },
   "scripts": {
     "test": "mocha --recursive --reporter spec --no-colors --timeout 500 test"
