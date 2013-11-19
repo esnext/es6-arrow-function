@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "esprima": "git://github.com/ariya/esprima.git#harmony",
-    "escodegen": "~1.0.0",
-    "ast-types": "~0.3.10"
+    "ast-types": "~0.3.10",
+    "recast": "~0.4.24"
   },
   "devDependencies": {
     "expect.js": "~0.2.0",

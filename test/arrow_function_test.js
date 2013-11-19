@@ -1,4 +1,9 @@
 var expect = require('./test_helper');
+var recast = require('recast');
+var esprima = require('esprima');
+var types = require('ast-types');
+var n = types.namedTypes;
+var transform = require('../lib').transform;
 
 describe('compile', function() {
   it('empty arrow function returns undefined', function() {
@@ -68,25 +73,23 @@ describe('compile', function() {
 
 describe('transform', function() {
   it('works with an AST instead of strings', function() {
-    expect('() => {}').to.transform({
-      type: "Program",
-      body: [{
-        type: "ExpressionStatement",
-        expression: {
-          type: "FunctionExpression",
-          id: null,
-          params: [],
-          defaults: [],
-          body: {
-            type: "BlockStatement",
-            body: []
-          },
-          rest: null,
-          generator: false,
-          expression: false,
-          loc: null
-        }
-      }]
+    var ast = transform(recast.parse('() => {}', { esprima: esprima }));
+    var foundFunctionExpression = false;
+    var foundArrowFunctionExpression = false;
+
+    types.traverse(ast, function(node) {
+      if (n.ArrowFunctionExpression.check(node)) {
+        foundArrowFunctionExpression = true;
+        return false;
+      }
+
+      if (n.FunctionExpression.check(node)) {
+        foundFunctionExpression = true;
+        return false;
+      }
     });
+
+    expect(foundFunctionExpression).to.be(true);
+    expect(foundArrowFunctionExpression).to.be(false);
   });
 });
