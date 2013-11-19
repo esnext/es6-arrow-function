@@ -1,0 +1,22 @@
+{
+  "name": "es6-arrow-function",
+  "version": "0.0.1",
+  "description": "Shorthand arrow functions compiled to ES5.",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "esprima": "git://github.com/ariya/esprima.git#4bf313134c93e71a97524dada947c5d07b08702b",
+    "escodegen": "~1.0.0"
+  },
+  "devDependencies": {
+    "expect.js": "~0.2.0",
+    "json-diff": "~0.3.1"
+  },
+  "scripts": {
+    "test": "mocha --recursive --reporter spec --no-colors --timeout 500 test"
+  },
+  "author": "Square, Inc.",
+  "license": "Apache 2"
+}

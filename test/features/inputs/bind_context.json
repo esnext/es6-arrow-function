@@ -1,0 +1,63 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "MemberExpression",
+          "computed": false,
+          "object": {
+            "type": "Identifier",
+            "name": "stream"
+          },
+          "property": {
+            "type": "Identifier",
+            "name": "on"
+          }
+        },
+        "arguments": [
+          {
+            "type": "Literal",
+            "value": "data",
+            "raw": "\"data\""
+          },
+          {
+            "type": "ArrowFunctionExpression",
+            "id": null,
+            "params": [
+              {
+                "type": "Identifier",
+                "name": "d"
+              }
+            ],
+            "defaults": [],
+            "body": {
+              "type": "AssignmentExpression",
+              "operator": "+=",
+              "left": {
+                "type": "MemberExpression",
+                "computed": false,
+                "object": {
+                  "type": "ThisExpression"
+                },
+                "property": {
+                  "type": "Identifier",
+                  "name": "data"
+                }
+              },
+              "right": {
+                "type": "Identifier",
+                "name": "d"
+              }
+            },
+            "rest": null,
+            "generator": false,
+            "expression": true
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "Identifier",
+          "name": "alert"
+        },
+        "arguments": [
+          {
+            "type": "ArrowFunctionExpression",
+            "id": null,
+            "params": [],
+            "defaults": [],
+            "body": {
+              "type": "ArrowFunctionExpression",
+              "id": null,
+              "params": [],
+              "defaults": [],
+              "body": {
+                "type": "ThisExpression"
+              },
+              "rest": null,
+              "generator": false,
+              "expression": true
+            },
+            "rest": null,
+            "generator": false,
+            "expression": true
+          }
+        ]
+      }
+    }
+  ]
+}
