@@ -1,0 +1,37 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "ArrowFunctionExpression",
+        "id": null,
+        "params": [],
+        "defaults": [],
+        "body": {
+          "type": "FunctionExpression",
+          "id": null,
+          "params": [],
+          "defaults": [],
+          "body": {
+            "type": "BlockStatement",
+            "body": [
+              {
+                "type": "ReturnStatement",
+                "argument": {
+                  "type": "ThisExpression"
+                }
+              }
+            ]
+          },
+          "rest": null,
+          "generator": false,
+          "expression": false
+        },
+        "rest": null,
+        "generator": false,
+        "expression": true
+      }
+    }
+  ]
+}

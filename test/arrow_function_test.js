@@ -49,4 +49,8 @@ describe('compileAST', function() {
   it('handles nested context bindings when "this" is used', function() {
     runFeature('nested_context_binding');
   });
+
+  it('does not bind the current context when the "this" is inside a standard function', function() {
+    runFeature('scope_change_prevents_context_binding');
+  });
 });
