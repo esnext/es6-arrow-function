@@ -13,6 +13,9 @@ compiles to this:
 [1, 2, 3].map(function(n) { return n * 2; });
 ```
 
+For more information about the proposed syntax, see the [TC39 wiki page on
+arrow functions](http://tc39wiki.calculist.org/es6/arrow-functions/).
+
 ## Install
 
 ```
