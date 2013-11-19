@@ -1,56 +1,91 @@
-var expect = require('expect.js');
-var diff = require('json-diff').diffString;
-var compile = require('../lib').compile;
-var compileAST = require('../lib').compileAST;
+var expect = require('./test_helper');
 
 describe('compile', function() {
-  it('works without arguments', function() {
-    expect(compile('$(() => main());')).to.be('$(function () {\n  return main();\n});');
+  it('empty arrow function returns undefined', function() {
+    expect(
+      'let empty = () => {};'
+    ).to.compileTo(
+      'let empty = function() {};'
+    );
   });
 
-  it('works with a single argument', function() {
-    expect(compile('[1, 2, 3].map(n => n * 2);')).to.be('[\n  1,\n  2,\n  3\n].map(function (n) {\n  return n * 2;\n});');
+  it('single parameter case needs no parentheses around parameter list', function() {
+    expect(
+      'let identity = x => x;'
+    ).to.compileTo(
+      'let identity = function(x) { return x; };'
+    );
   });
 
-  it('works with a single argument', function() {
-    expect(compile('[1, 2, 3].map((n, i) => n * i);')).to.be('[\n  1,\n  2,\n  3\n].map(function (n, i) {\n  return n * i;\n});');
+  it('no need for parentheses even for lower-precedence expression body', function() {
+    expect(
+      'let square = x => x * x;'
+    ).to.compileTo(
+      'let square = function(x) { return x * x; };'
+    );
+  });
+
+  it('parenthesize the body to return an object literal expression', function() {
+    expect(
+      'let key_maker = val => ({key: val});'
+    ).to.compileTo(
+      'let key_maker = function(val) { return {key: val}; };'
+    );
+  });
+
+  it('statement body needs braces, must use `return` explicitly if not void', function() {
+    expect(
+      'let odds = evens.map(v => v + 1);'
+    ).to.compileTo(
+      'let odds = evens.map(function(v) { return v + 1; });'
+    );
+  });
+
+  it('`=>` has only lexical `this`, no dynamic `this`', function() {
+    expect(
+      'const obj = { method: function() { return () => this; } };'
+    ).to.compileTo(
+      'const obj = { method: function() { return (function() { return this; }).bind(this); } };'
+    );
+  });
+
+  it('handles nested context bindings when `this` is used', function() {
+    expect(
+      'alert(() => () => this);'
+    ).to.compileTo(
+      'alert((function() { return (function() { return this; }).bind(this); }.bind(this)));'
+    );
+  });
+
+  it('does not bind the current context when the `this` is inside a standard function', function() {
+    expect(
+      '() => function() { return this; };'
+    ).to.compileTo(
+      '(function() { return function() { return this; }; })'
+    );
   });
 });
 
 describe('compileAST', function() {
-  function runFeature(name) {
-    var expected = require('./features/expected/'+name+'.json');
-    var actual = compileAST(require('./features/inputs/'+name+'.json'));
-
-    try {
-      expect(actual).to.eql(expected);
-    } catch (ex) {
-      console.log('Found a difference in generated AST:', diff(expected, actual));
-      throw ex;
-    }
-  }
-
-  it('works without arguments', function() {
-    runFeature('no_arguments');
-  });
-
-  it('works with a single argument', function() {
-    runFeature('single_argument');
-  });
-
-  it('works with multiple arguments', function() {
-    runFeature('multiple_arguments');
-  });
-
-  it('binds the context when "this" is used', function() {
-    runFeature('bind_context');
-  });
-
-  it('handles nested context bindings when "this" is used', function() {
-    runFeature('nested_context_binding');
-  });
-
-  it('does not bind the current context when the "this" is inside a standard function', function() {
-    runFeature('scope_change_prevents_context_binding');
+  it('works with an AST instead of strings', function() {
+    expect('() => {}').to.compileToAST({
+      type: "Program",
+      body: [{
+        type: "ExpressionStatement",
+        expression: {
+          type: "FunctionExpression",
+          id: null,
+          params: [],
+          defaults: [],
+          body: {
+            type: "BlockStatement",
+            body: []
+          },
+          rest: null,
+          generator: false,
+          expression: false
+        }
+      }]
+    });
   });
 });
