@@ -7,7 +7,7 @@
     "test": "test"
   },
   "dependencies": {
-    "esprima": "git://github.com/ariya/esprima.git#4bf313134c93e71a97524dada947c5d07b08702b",
+    "esprima": "git://github.com/ariya/esprima.git#harmony",
     "escodegen": "~1.0.0"
   },
   "devDependencies": {
