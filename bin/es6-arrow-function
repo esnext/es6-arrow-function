@@ -1,10 +1,23 @@
 #!/usr/bin/env node
 
 function showUsage(code) {
-  console.log('USAGE:');
-  console.log('es6-arrow-function file');
-  console.log('es6-arrow-function -- file');
-  console.log('cat file | es6-arrow-function');
+  var name = require('path').basename(process.argv[1]);
+  console.log('Usage:', name, '[options] [--] [FILE]');
+  console.log();
+  console.log('Options:');
+  console.log();
+  console.log('  -h, --help      prints this usage info');
+  console.log();
+  console.log('Examples:');
+  console.log();
+  console.log('  # process a file and output to stdout');
+  console.log('  es6-arrow-function app.js');
+  console.log();
+  console.log('  # process a file starting with a dash');
+  console.log('  es6-arrow-function -- -f.js');
+  console.log();
+  console.log('  # process from stdin to stdout');
+  console.log('  echo "x => x * x" | es6-arrow-function');
   process.exit(+code);
 }
 
@@ -13,39 +26,45 @@ module.exports = require('..');
 var run = module.exports.run = function run() {
   var inRawArgs = false;
   var args = [];
-  [].slice.call(arguments).forEach(function (arg) {
+
+  [].forEach.call(arguments, function(arg) {
     if (!inRawArgs) {
       switch(arg) {
         case '--':
           inRawArgs = true;
-        break;
+          break;
+
         case '-h':
-        case '--help': 
+        case '--help':
           showUsage();
+          break;
+
         default:
           args.push(arg);
       }
-    }
-    else {
+    } else {
       args.push(arg);
     }
   });
+
   if (args.length > 1) {
     showUsage(1);
   }
-  
+
   var stream;
   if (process.stdin.isTTY) {
+    if (args.length === 0) {
+      showUsage(1);
+    }
     stream = require('fs').createReadStream(args[0]);
-  }
-  else {
-    if (args.length) {
+  } else {
+    if (args.length !== 0) {
       showUsage(1);
     }
     stream = process.stdin;
   }
   stream.pipe(module.exports()).pipe(process.stdout);
-}
+};
 
 if (require.main === module) {
   run.apply(null, process.argv.slice(2));
