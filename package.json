@@ -7,6 +7,10 @@
   "directories": {
     "test": "test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:square/es6-arrow-function.git"
+  },
   "dependencies": {
     "esprima": "git://github.com/ariya/esprima.git#harmony",
     "ast-types": "~0.3.10",
