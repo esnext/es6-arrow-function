@@ -144,6 +144,37 @@ $ node
 }
 ```
 
+## Command line
+
+If installing via `npm` a command line tool will be available called `es6-arrow-function`.
+
+```
+> echo "()=>123" | es6-arrow-function
+(function () {
+  return 123;
+});
+```
+
+```
+> es6-arrow-function $file
+(function () {
+  return 123;
+});
+```
+
+## Browserify
+
+Browserify support is built in.
+
+```
+> npm install es6-arrow-function #install local dependency
+> browserify -t es6-arrow-function $file
+// BOILERPLATE
+(function () {
+  return 123;
+});
+```
+
 ## Contributing
 
 [![Build Status](https://travis-ci.org/square/es6-arrow-function.png?branch=master)](https://travis-ci.org/square/es6-arrow-function)
