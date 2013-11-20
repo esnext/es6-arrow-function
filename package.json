@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "description": "Shorthand arrow functions compiled to ES5.",
   "main": "lib/index.js",
+  "bin": "bin/es6-arrow-function",
   "directories": {
     "test": "test"
   },
   "dependencies": {
     "esprima": "git://github.com/ariya/esprima.git#harmony",
     "ast-types": "~0.3.10",
-    "recast": "~0.4.24"
+    "recast": "~0.4.24",
+    "escodegen": "~1.0.0",
+    "through": "~2.3.4"
   },
   "devDependencies": {
     "expect.js": "~0.2.0",

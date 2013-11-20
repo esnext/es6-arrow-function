@@ -1,0 +1,52 @@
+#!/usr/bin/env node
+
+function showUsage(code) {
+  console.log('USAGE:');
+  console.log('es6-arrow-function file');
+  console.log('es6-arrow-function -- file');
+  console.log('cat file | es6-arrow-function');
+  process.exit(+code);
+}
+
+module.exports = require('..');
+
+var run = module.exports.run = function run() {
+  var inRawArgs = false;
+  var args = [];
+  [].slice.call(arguments).forEach(function (arg) {
+    if (!inRawArgs) {
+      switch(arg) {
+        case '--':
+          inRawArgs = true;
+        break;
+        case '-h':
+        case '--help': 
+          showUsage();
+        default:
+          args.push(arg);
+      }
+    }
+    else {
+      args.push(arg);
+    }
+  });
+  if (args.length > 1) {
+    showUsage(1);
+  }
+  
+  var stream;
+  if (process.stdin.isTTY) {
+    stream = require('fs').createReadStream(args[0]);
+  }
+  else {
+    if (args.length) {
+      showUsage(1);
+    }
+    stream = process.stdin;
+  }
+  stream.pipe(module.exports()).pipe(process.stdout);
+}
+
+if (require.main === module) {
+  run.apply(null, process.argv.slice(2));
+}
