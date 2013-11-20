@@ -97,9 +97,9 @@ $ cat ast.json
   ]
 }
 $ node
-> var compileAST = require('es6-arrow-function').compileAST;
+> var transform = require('es6-arrow-function').transform;
 [Function]
-> console.log JSON.stringify(compileAST(require('./ast.json')), null, 2);
+> console.log JSON.stringify(transform(require('./ast.json')), null, 2);
 {
   "type": "Program",
   "body": [
@@ -149,14 +149,14 @@ $ node
 If installing via `npm` a command line tool will be available called `es6-arrow-function`.
 
 ```
-> echo "()=>123" | es6-arrow-function
+$ echo "()=>123" | es6-arrow-function
 (function () {
   return 123;
 });
 ```
 
 ```
-> es6-arrow-function $file
+$ es6-arrow-function $file
 (function () {
   return 123;
 });
@@ -167,8 +167,8 @@ If installing via `npm` a command line tool will be available called `es6-arrow-
 Browserify support is built in.
 
 ```
-> npm install es6-arrow-function #install local dependency
-> browserify -t es6-arrow-function $file
+$ npm install es6-arrow-function  # install local dependency
+$ browserify -t es6-arrow-function $file
 // BOILERPLATE
 (function () {
   return 123;
