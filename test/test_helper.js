@@ -1,7 +1,6 @@
 var expect = require('expect.js');
 var recast = require('recast');
 var esprimaHarmony = require("esprima");
-var diff = require('json-diff').diffString;
 var compile = require('../lib').compile;
 var transform = require('../lib').transform;
 
