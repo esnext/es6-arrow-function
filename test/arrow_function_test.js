@@ -89,7 +89,7 @@ describe('transform', function() {
       }
     });
 
-    expect(foundFunctionExpression).to.be(true);
-    expect(foundArrowFunctionExpression).to.be(false);
+    expect(foundFunctionExpression).to.equal(true);
+    expect(foundArrowFunctionExpression).to.equal(false);
   });
 });
