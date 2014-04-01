@@ -10,7 +10,7 @@ var recastOptions = {
 };
 
 function normalize(source) {
-  return recast.prettyPrint(recast.parse(source, recastOptions), recastOptions);
+  return recast.prettyPrint(recast.parse(source, recastOptions), recastOptions).code;
 }
 
 expect.Assertion.prototype.compileTo = function(expected) {
