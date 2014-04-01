@@ -33,28 +33,28 @@ $ node
 Without arguments:
 
 ```js
-> compile('$(() => main());');
+> compile('$(() => main());').code;
 '$(function() { return main(); });'
 ```
 
 With a single argument:
 
 ```js
-> compile('[1, 2, 3].map(n => n * 2);');
+> compile('[1, 2, 3].map(n => n * 2);').code;
 '[1, 2, 3].map(function(n) { return n * 2; });'
 ```
 
 With multiple arguments:
 
 ```js
-> compile('[1, 2, 3].map((n, i) => n * i);');
+> compile('[1, 2, 3].map((n, i) => n * i);').code;
 '[1, 2, 3].map(function(n, i) { return n * i; });'
 ```
 
 It binds the current context:
 
 ```js
-> compile('stream.on("data", d => this.data += d);');
+> compile('stream.on("data", d => this.data += d);').code;
 'stream.on("data", (function(d) { return this.data += d; }).bind(this));'
 ```
 
