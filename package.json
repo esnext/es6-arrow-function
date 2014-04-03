@@ -18,11 +18,10 @@
     "through": "~2.3.4"
   },
   "devDependencies": {
-    "expect.js": "~0.2.0",
-    "mocha": "~1.14.0"
+    "example-runner": "0.0.2"
   },
   "scripts": {
-    "test": "mocha --recursive --reporter spec --no-colors --timeout 500 test"
+    "test": "node test/runner.js"
   },
   "author": "Square, Inc.",
   "license": "Apache 2"
