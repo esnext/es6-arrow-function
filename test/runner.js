@@ -5,6 +5,18 @@
  */
 
 var compile = require('../lib').compile;
-require('example-runner').runCLI(function(source) {
-  return compile(source).code;
+var recast = require('recast');
+var esprima = require('esprima');
+
+require('example-runner').runCLI({
+  context: {
+    normalize: function(source) {
+      var ast = recast.parse(source, { esprima: esprima });
+      return recast.prettyPrint(ast, { esprima: esprima }).code;
+    }
+  },
+
+  transform: function(source) {
+    return compile(source).code;
+  }
 });
