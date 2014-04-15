@@ -99,7 +99,7 @@ $ cat ast.json
 $ node
 > var transform = require('es6-arrow-function').transform;
 [Function]
-> console.log JSON.stringify(transform(require('./ast.json')), null, 2);
+> console.log(JSON.stringify(transform(require('./ast.json')), null, 2));
 {
   "type": "Program",
   "body": [
