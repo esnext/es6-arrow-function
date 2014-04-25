@@ -4,11 +4,21 @@
  * will already be in the context.
  */
 
-var compile = require('../lib').compile;
+Error.stackTraceLimit = 20;
+
+var arrowFn = require('../lib');
 var recast = require('recast');
 var esprima = require('esprima');
 
-require('example-runner').runCLI({
+var fs = require('fs');
+var path = require('path');
+var RESULTS = 'test/results';
+
+if (!fs.existsSync(RESULTS)) {
+  fs.mkdirSync(RESULTS);
+}
+
+require('example-runner').runCLI(process.argv.slice(2), {
   context: {
     normalize: function(source) {
       var ast = recast.parse(source, { esprima: esprima });
@@ -16,7 +26,19 @@ require('example-runner').runCLI({
     }
   },
 
-  transform: function(source) {
-    return compile(source).code;
+  transform: function(source, testName, filename) {
+    var recastOptions = {
+      esprima: esprima,
+      sourceFileName: filename,
+      sourceMapName: filename + '.map'
+    };
+
+    var ast = recast.parse(source, recastOptions);
+    ast = arrowFn.transform(ast);
+    var result = recast.print(ast, recastOptions);
+
+    fs.writeFileSync(path.join(RESULTS, testName + '.js'), result.code, 'utf8');
+    fs.writeFileSync(path.join(RESULTS, testName + '.js.map'), JSON.stringify(result.map), 'utf8');
+    return result.code;
   }
 });
