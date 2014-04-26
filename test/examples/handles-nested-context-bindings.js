@@ -2,7 +2,7 @@
 
 var obj = {
   method: function() {
-    return () => () => this;
+    return () => (this, () => this);
   }
 };
 
