@@ -15,7 +15,7 @@
     "esprima": "git://github.com/ariya/esprima.git#harmony",
     "recast": "~0.5.12",
     "through": "~2.3.4",
-    "ast-util": "0.0.1"
+    "ast-util": "^0.0.2"
   },
   "devDependencies": {
     "example-runner": "0.1.0"
