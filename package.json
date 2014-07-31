@@ -12,7 +12,7 @@
     "url": "git@github.com:square/es6-arrow-function.git"
   },
   "dependencies": {
-    "esprima": "git://github.com/ariya/esprima.git#harmony",
+    "esprima": "git://github.com/esnext/esprima#harmony-esnext",
     "recast": "~0.5.12",
     "through": "~2.3.4",
     "ast-util": "^0.0.5"
