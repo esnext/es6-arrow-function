@@ -8,7 +8,7 @@ Error.stackTraceLimit = 20;
 
 var arrowFn = require('../lib');
 var recast = require('recast');
-var esprima = require('esprima');
+var esprima = require('esprima-fb');
 
 var fs = require('fs');
 var path = require('path');
