@@ -14,7 +14,7 @@
   "dependencies": {
     "ast-util": "^0.4.1",
     "esprima-fb": "^5001.1.0-dev-harmony-fb",
-    "recast": "~0.5.12",
+    "recast": "^0.7.0",
     "through": "~2.3.4"
   },
   "devDependencies": {
