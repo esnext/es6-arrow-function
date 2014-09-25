@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "ast-util": "^0.4.1",
-    "esprima-fb": "^5001.1.0-dev-harmony-fb",
-    "recast": "^0.7.0",
+    "esprima-fb": "^6001.1001.0-dev-harmony-fb",
+    "recast": "^0.7.2",
     "through": "~2.3.4"
   },
   "devDependencies": {
