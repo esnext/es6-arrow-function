@@ -8,7 +8,6 @@ Error.stackTraceLimit = 20;
 
 var arrowFn = require('../lib');
 var recast = require('recast');
-var esprima = require('esprima-fb');
 
 var fs = require('fs');
 var path = require('path');
@@ -21,14 +20,13 @@ if (!fs.existsSync(RESULTS)) {
 require('example-runner').runCLI(process.argv.slice(2), {
   context: {
     normalize: function(source) {
-      var ast = recast.parse(source, { esprima: esprima });
-      return recast.prettyPrint(ast, { esprima: esprima }).code;
+      var ast = recast.parse(source);
+      return recast.prettyPrint(ast).code;
     }
   },
 
   transform: function(source, testName, filename) {
     var recastOptions = {
-      esprima: esprima,
       sourceFileName: filename,
       sourceMapName: filename + '.map'
     };
