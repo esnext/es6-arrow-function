@@ -1,4 +1,4 @@
-# es6-arrow-function
+# es6-arrow-function [![Build Status](https://travis-ci.org/esnext/es6-arrow-function.svg?branch=master)](https://travis-ci.org/esnext/es6-arrow-function)
 
 Compiles JavaScript written using arrow functions to use ES5-compatible
 function syntax. For example, this:
