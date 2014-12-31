@@ -12,13 +12,13 @@
     "url": "git@github.com:square/es6-arrow-function.git"
   },
   "dependencies": {
-    "ast-util": "^0.5.2",
+    "ast-util": "^0.6.0",
     "recast": "^0.9.11",
     "through": "~2.3.6"
   },
   "devDependencies": {
     "example-runner": "0.2.0",
-    "mocha": "^2.0.1"
+    "mocha": "^2.1.0"
   },
   "scripts": {
     "test": "node test/runner.js && mocha --recursive test/unit"
